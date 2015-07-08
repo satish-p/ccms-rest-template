@@ -1,0 +1,64 @@
+apply plugin: 'maven'
+
+group = 'com.aol'
+version = new ProjectVersion(1, 0, System.env.SOURCE_BUILD_NUMBER)
+ext.pversion = new ProjectVersion(1, 0, System.env.BUILD_NUMBER)
+
+class ProjectVersion {
+	Integer major;
+	Integer minor;
+	String build;
+	
+	ProjectVersion(Integer major, Integer minor, String build) {
+		this.major = major;
+		this.minor = minor;
+		this.build = build;
+	}
+	
+	String toString() {
+		String fullString = "$major.$minor";
+		if(build) {
+			fullString += ".$build";
+		}
+		
+		return fullString;
+	}
+}
+
+def getMavenSettingsCredentials = {
+	String userHome = System.getProperty( "user.home" );
+	File mavenSettings = new File(userHome, ".m2/settings-paid-services.xml")
+	if(!mavenSettings.exists()) {
+		return null;
+	}
+	def xmlSlurper = new XmlSlurper()
+	def output = xmlSlurper.parse(mavenSettings)
+	return output."servers"."server"
+}
+
+def getCreds = {
+	def entries = getMavenSettingsCredentials()
+	if(entries==null) {
+		return null;
+	}
+	for (entry in entries) {
+		if ( entry."id".text() == "aol-paid-services-snapshots" ) {
+			return [username: entry.username.text(), password: entry.password.text()]
+	}
+  }
+}
+
+
+uploadArchives {
+	def creds = getCreds()
+	if(creds==null) {
+		creds = [:]
+	}
+	repositories {
+		mavenDeployer {
+			repository(url: "http://cmmaven.cm.aol.com:8081/nexus/content/repositories/aol-paid-svcs") {
+				authentication(userName: creds["username"], password: creds["password"])
+			}
+		}
+	}
+}

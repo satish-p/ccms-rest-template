@@ -1,0 +1,90 @@
+buildscript {
+	ext {
+        springBootVersion = '1.2.5.RELEASE'
+    }
+    repositories {
+		maven { url "http://cmmaven.cm.aol.com:8081/nexus/content/groups/public" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+        classpath "se.transmode.gradle:gradle-docker:1.2"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+apply from: 'gradle/integrationtest.gradle'
+apply from: 'gradle/jacoco.gradle'
+apply from: 'gradle/pmd.gradle'
+apply from: 'gradle/jdepend.gradle'
+apply from: 'gradle/sonar.gradle'
+apply from: 'gradle/version.gradle'
+apply from: 'gradle/docker.gradle'
+
+project.ext.pversion = "$pversion"
+import org.apache.tools.ant.filters.*
+processResources {
+	filter ReplaceTokens, tokens: [
+		"project.version": project.getProperty("pversion").toString()
+	]
+}
+
+apply plugin: 'war'
+war {
+    baseName = 'cmitemplate'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "http://cmmaven.cm.aol.com:8081/nexus/content/groups/public" }
+}
+
+def springVersion="4.1.7.RELEASE"
+def springSecurityVersion="3.2.5.RELEASE"
+
+dependencies {
+	// Spring Boot
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
+	
+	// Mappers
+    compile("com.fasterxml.jackson.core:jackson-databind:2.3.1")
+	
+	// Http
+    compile("org.apache.httpcomponents:httpclient:4.3.1")
+	
+	// HATEOS
+	compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
+	
+	// Aspects
+    compile 'org.aspectj:aspectjrt:1.7.4'
+    compile 'org.aspectj:aspectjweaver:1.7.4'
+    
+	// Utils
+    compile 'com.aol:hog4j:4.1'
+	compile 'com.aol.logging:web-logs:2.0.1'
+	
+	// API Documentation
+	
+	// Caching
+	compile ('net.sf.ehcache:ehcache-core:2.6.8')
+	compile ("org.springframework:spring-context-support:$springVersion")
+	
+	// Metrics
+	compile "com.codahale.metrics:metrics-core:3.0.1"
+	compile "com.codahale.metrics:metrics-servlets:3.0.1"
+	compile 'net.bull.javamelody:javamelody-core:1.52.0'
+		
+	// Testing
+    testCompile("junit:junit:4.11")
+    testCompile("org.springframework:spring-test:$springVersion")
+	testCompile "org.mockito:mockito-all:1.9.5"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2'
+}

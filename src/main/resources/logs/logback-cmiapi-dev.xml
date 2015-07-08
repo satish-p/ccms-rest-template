@@ -1,0 +1,29 @@
+<configuration scan="true" scanPeriod="30 seconds" debug="true">
+    <!-- Docs about config: http://logback.qos.ch/manual/configuration.html -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{ISO8601} %-5level [%thread] %40.40logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>/data/servers/logs/cmiapi.log</file>
+        <append>false</append>
+        <encoder>
+            <pattern>%d{ISO8601} %-5level [%thread] %40.40logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.aol.logging" level="info"/>
+    <logger name="com.aol.cmi" level="debug"/>
+    <logger name="com.aol.cmi.authorization.filter" level="info"/>
+
+	<!-- Set the following to debug to see all http requests on the wire -->
+    <logger name="org.springframework.web.client.RestTemplate" level="debug"/>
+    <logger name="org.apache.http.wire" level="info"/>
+
+    <root level="info">
+        <appender-ref ref="FILE"/>
+    </root>
+    
+</configuration>

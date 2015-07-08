@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<util:list id="loggingFilteredUris">
+		<value>/js</value>
+		<value>/img</value>
+		<value>/assets</value>
+		<value>/css</value>
+		<value>/_uac</value>
+		<value>/_ns</value>
+		<value>/template</value>
+		<value>/monitoring</value>
+		<value>/manage</value>
+		<value>/catalog</value>
+	</util:list>
+	
+	<util:list id="sensitiveKeys">
+		<value>creditVerificationCode</value>
+		<value>creditVerificationValue</value>
+		<value>securityQuestionAnswer</value>
+		<value>securityAnswer</value>
+		<value>password</value>
+		<value>credentials</value>
+		<value>accountNumber</value>
+		<value>cvv</value>
+	</util:list>
+</beans>

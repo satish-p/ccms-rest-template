@@ -1,0 +1,29 @@
+apply plugin: 'docker'
+
+configurations {
+    newrelic	// Allow for the copying of the New Relic agent at run time.
+}
+
+def newrelicVersion='3.18.0'
+
+dependencies {
+    newrelic "com.newrelic.agent.java:newrelic-agent:${newrelicVersion}"
+}
+
+task copyAgent(type: Copy) {
+    from {
+        configurations.newrelic				
+    }
+    into "$buildDir/libs"
+    rename ("newrelic-agent-${newrelicVersion}.jar", 'newrelic.jar')
+}
+
+distDocker {
+    exposePort 8080
+    push true
+    tag = "docker.aws.obi.aol.com/cmitemplate"
+    addFile ("$buildDir/libs/newrelic.jar", "/app/newrelic.jar")
+    addFile ("src/main/resources/newrelic.yml", "/app/newrelic.yml")
+}
+
+distDocker.dependsOn copyAgent

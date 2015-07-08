@@ -1,0 +1,21 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+    <diskStore path="java.io.tmpdir"/>
+
+    <!--
+    Mandatory Default Cache configuration. These settings will be applied to caches
+    created programmtically using CacheManager.add(String cacheName)
+    -->
+    <defaultCache  maxElementsInMemory="1000" eternal="false"
+            timeToIdleSeconds="1200" timeToLiveSeconds="1200" maxElementsOnDisk="10000000"
+            diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+        <persistence strategy="localTempSwap"/>
+    </defaultCache>
+
+   <cache name="products" timeToLiveSeconds="60" timeToIdleSeconds="600" maxElementsInMemory="1000"/>
+
+   <cache name="cms" timeToLiveSeconds="600" timeToIdleSeconds="600" maxElementsInMemory="1000"/>
+
+</ehcache>
