@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 
-import dao.CpsDao;
-import dao.CpsDaoImpl;
-import application.RestTemplateConfiguration;
+import app.configuration.RestTemplateConfiguration;
+import app.dao.CpsDao;
+import app.dao.CpsDaoImpl;
 
 @Configuration
 @ImportResource({"classpath*:spring/properties-context.xml"
