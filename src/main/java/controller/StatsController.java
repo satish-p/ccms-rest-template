@@ -1,7 +1,5 @@
 package controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ public class StatsController {
 
 	private static final String CMI_API_OK = "OK";
 	private boolean shouldShutdown;
-	private static final Logger LOGGER = LoggerFactory.getLogger(StatsController.class);
 	
 	@Autowired
 	private Profiler profiler;
@@ -37,19 +34,4 @@ public class StatsController {
 		return new ResponseEntity<String>(CMI_API_OK, status);
 	}
 	
-	@RequestMapping("_ns_/nstest.html.stop")
-	public String shutdown() {
-		LOGGER.info("Taking service out of load balancer rotation");
-		this.shouldShutdown = true;
-		return CMI_API_OK;
-	}
-	
-	@RequestMapping("_ns_/nstest.html.start")
-	public String startup() {
-		LOGGER.info("Putting service into load balancer rotation");
-		this.shouldShutdown = false;
-		return CMI_API_OK;
-	}
-	
-
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import stats.Profiler;
@@ -40,18 +39,6 @@ public class StatsControllerTest {
 		when(profiler.getHtmlHogStats()).thenReturn("<blah></blah>");
 		assertNotNull(controller.clearStats());
 		verify(profiler).getHtmlHogStats();
-	}
-
-	@Test
-	public void testStartup() {
-		controller.startup();
-		assertEquals(HttpStatus.OK, controller.nstest().getStatusCode());
-	}
-
-	@Test
-	public void testShutdown() {
-		controller.shutdown();
-		assertNotEquals(HttpStatus.OK, controller.nstest().getStatusCode());
 	}
 
 }
