@@ -34,7 +34,7 @@ processResources {
 
 apply plugin: 'war'
 war {
-    baseName = 'cmitemplate'
+    baseName = 'resttemplate'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
