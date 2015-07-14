@@ -23,14 +23,19 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	@Cacheable("cms")
-	public ContentBlock getContentBlock(String id) {
-		return catalogDao.getCmsBlock(id);
+	public List<ProductSummary> getUpsellProducts(String id) {
+		return catalogDao.getUpsellProducts(id);
 	}
 
 	@Override
-	public List<ProductSummary> getUpsellProducts(String id) {
-		return catalogDao.getUpsellProducts(id);
+	public List<ProductSummary> getXsellProducts(String id) {
+		return catalogDao.getXsellProducts(id);
+	}
+
+	@Override
+	@Cacheable("cms")
+	public ContentBlock getContentBlock(String id) {
+		return catalogDao.getCmsBlock(id);
 	}
 
 	@Override

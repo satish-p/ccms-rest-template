@@ -36,4 +36,6 @@ public interface CatalogService {
 	 * @return
 	 */
 	List<ProductSummary> getUpsellProducts(String id);
+
+	List<ProductSummary> getXsellProducts(String id);
 }

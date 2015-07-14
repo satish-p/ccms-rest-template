@@ -93,4 +93,17 @@ public class CatalogServiceTest {
 		verify(catalogDao).getUpsellProducts(anyString());
 	}
 
+	@Test
+	public void testGetXsellProducts() {
+		// Set Expectations
+		when(catalogDao.getXsellProducts(anyString())).thenReturn(Arrays.asList(createProduct("redbox-dvd-rental")));
+
+		final List<ProductSummary> summaries = catalogService.getXsellProducts("redbox-dvd-rental");
+		Assert.assertNotNull(summaries);
+		Assert.assertFalse(summaries.isEmpty());
+
+		// Verify
+		verify(catalogDao).getXsellProducts(anyString());
+	}
+
 }

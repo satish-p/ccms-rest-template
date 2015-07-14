@@ -43,5 +43,10 @@ public class CatalogDaoIntegrationTest {
 		Assert.assertFalse(catalogDao.getUpsellProducts("aol-computer-checkup-1").isEmpty());
 	}
 
+	@Test
+	public void testGetXsellProducts() {
+		Assert.assertFalse(catalogDao.getXsellProducts("aol-computer-checkup-1").isEmpty());
+	}
+
 
 }

@@ -78,4 +78,17 @@ public class CatalogDaoImplTest {
 		verify(restTemplate).getForObject(anyString(), eq(ProductSummary[].class));
 	}
 
+	@Test
+	public void testGetXsellProducts() {
+		// Set Expectations
+		when(restTemplate.getForObject(anyString(), eq(ProductSummary[].class)))
+		.thenReturn(new ProductSummary[0]);
+		
+		// Test
+		assertNotNull(catalogDaoImpl.getXsellProducts("sku"));
+		
+		// Verify
+		verify(restTemplate).getForObject(anyString(), eq(ProductSummary[].class));
+	}
+
 }

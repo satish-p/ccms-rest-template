@@ -50,11 +50,6 @@ public class CatalogController {
 		return catalogService.getUpsellProducts(id);
 	}
 
-	@RequestMapping(value = "/products/{id}/xsell", method = RequestMethod.GET)
-	public List<ProductSummary> getXsellProducts(@PathVariable("id") final String id) {
-		return catalogService.getUpsellProducts(id);
-	}
-	
 	@RequestMapping(value = "/cms", method = RequestMethod.GET)
 	public List<ContentBlock> getContentBlocks(
 			@RequestParam("prefix") final String prefix) {

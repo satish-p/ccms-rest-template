@@ -34,4 +34,6 @@ public interface CatalogDao {
 	 */
 	List<ProductSummary> getUpsellProducts(String id);
 
+	List<ProductSummary> getXsellProducts(String id);
+
 }

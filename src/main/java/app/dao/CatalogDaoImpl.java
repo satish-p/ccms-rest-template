@@ -52,4 +52,10 @@ public class CatalogDaoImpl implements CatalogDao {
 		return Arrays.asList(restTemplate.getForObject(url, ProductSummary[].class));
 	}
 
+	@Override
+	public List<ProductSummary> getXsellProducts(String id) {
+		String url = String.format("%s/catalog/products/%s/related?view=avocado", ecommerceEndpoint, id);
+		return Arrays.asList(restTemplate.getForObject(url, ProductSummary[].class));
+	}
+
 }
