@@ -21,8 +21,6 @@ import app.service.CatalogServiceImpl;
 
 public class CatalogServiceTest {
 
-	private static final String VIEW_NAME = "desktop";
-
 	private CatalogService catalogService;
 	private CatalogDao catalogDao;
 	
@@ -39,7 +37,7 @@ public class CatalogServiceTest {
 		// Set Expectations
 		when(catalogDao.getProduct(anyString())).thenReturn(createProduct("redbox-dvd-rental"));
 
-		final ProductSummary productSummary = catalogService.getProductSummary("redbox-dvd-rental", VIEW_NAME);
+		final ProductSummary productSummary = catalogService.getProductSummary("redbox-dvd-rental");
 		Assert.assertNotNull(productSummary.getSku());
 
 		// Verify
@@ -87,7 +85,7 @@ public class CatalogServiceTest {
 		// Set Expectations
 		when(catalogDao.getUpsellProducts(anyString())).thenReturn(Arrays.asList(createProduct("redbox-dvd-rental")));
 
-		final List<ProductSummary> summaries = catalogService.getUpsellProducts("redbox-dvd-rental", VIEW_NAME);
+		final List<ProductSummary> summaries = catalogService.getUpsellProducts("redbox-dvd-rental");
 		Assert.assertNotNull(summaries);
 		Assert.assertFalse(summaries.isEmpty());
 

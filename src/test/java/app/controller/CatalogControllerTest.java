@@ -28,7 +28,6 @@ import app.service.DataNotFoundException;
 public class CatalogControllerTest {
 
 	private static final String PRODUCT_SKU = "sample";
-	private static final String DEFAULT_VIEW_ATTRIBUTES = "desktop";
 
 	private CatalogService catalogService;
 	private CatalogController catalogController;
@@ -50,15 +49,15 @@ public class CatalogControllerTest {
 	public void testGetProductString() throws Exception {
 		
 		// Set Expectations
-		when(catalogService.getProductSummary(anyString(), anyString()))
+		when(catalogService.getProductSummary(anyString()))
 		.thenReturn(createProductSummary(PRODUCT_SKU));
 		
 		// Do the test
-		ProductSummary responseEntity = catalogController.getProduct(PRODUCT_SKU, DEFAULT_VIEW_ATTRIBUTES);
+		ProductSummary responseEntity = catalogController.getProduct(PRODUCT_SKU);
 		assertNotNull(responseEntity);
 
 		// Verify
-		verify(catalogService).getProductSummary(anyString(), anyString());
+		verify(catalogService).getProductSummary(anyString());
 	}
 
 	private ProductSummary createProductSummary(String productSku) {
@@ -70,15 +69,15 @@ public class CatalogControllerTest {
 	@Test(expected=DataNotFoundException.class)
 	public void testGetProductStringNull() throws Exception {
 		// Set Expectations
-		when(catalogService.getProductSummary(anyString(), anyString()))
+		when(catalogService.getProductSummary(anyString()))
 		.thenThrow(new DataNotFoundException("Data not found"));
 		
 		// Do the test
-		ProductSummary responseEntity = catalogController.getProduct(PRODUCT_SKU, DEFAULT_VIEW_ATTRIBUTES);
+		ProductSummary responseEntity = catalogController.getProduct(PRODUCT_SKU);
 		assertNotNull(responseEntity);
 
 		// Verify
-		verify(catalogService).getProductSummary(anyString(), anyString());
+		verify(catalogService).getProductSummary(anyString());
 	}
 
 	@Test
@@ -121,16 +120,16 @@ public class CatalogControllerTest {
 	public void testGetUpsellProducts() throws Exception {
 		
 		// Set Expectations
-		when(catalogService.getUpsellProducts(anyString(), anyString()))
+		when(catalogService.getUpsellProducts(anyString()))
 		.thenReturn(Arrays.asList(createProductSummary(PRODUCT_SKU)));
 		
 		// Do the test
-		List<ProductSummary> responseEntity = catalogController.getUpsellProducts(PRODUCT_SKU, DEFAULT_VIEW_ATTRIBUTES);
+		List<ProductSummary> responseEntity = catalogController.getUpsellProducts(PRODUCT_SKU);
 		assertNotNull(responseEntity);
 		assertFalse(responseEntity.isEmpty());
 
 		// Verify
-		verify(catalogService).getUpsellProducts(anyString(), anyString());
+		verify(catalogService).getUpsellProducts(anyString());
 	}
 
 

@@ -33,16 +33,15 @@ public class CatalogController {
 	private CatalogService catalogService;
 	
 	@RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
-	public ProductSummary getProduct(
-			@PathVariable("id") final String id,
-			@RequestParam(value="view", required=false) String view) {
+	public ProductSummary getProduct(@PathVariable("id") final String id) {
 		
 		LOGGER.debug("Getting product {}", id);
-		ProductSummary productSummary = catalogService.getProductSummary(id, view);
+		ProductSummary productSummary = catalogService.getProductSummary(id);
 		
 		// Link to local
 		productSummary.removeLinks();
-		productSummary.add(linkTo(methodOn(CatalogController.class).getProduct(id, view)).withSelfRel());
+		productSummary.add(linkTo(methodOn(CatalogController.class).getProduct(id)).withSelfRel());
+		productSummary.add(linkTo(methodOn(CatalogController.class).getUpsellProducts(id)).withRel("upsell"));
 		return productSummary;
 	}
 
@@ -53,10 +52,10 @@ public class CatalogController {
 		List<ContentBlock> contentBlocks = catalogService.getContentBlocks(prefix);
 		
 		// Links
-		for(ContentBlock contentBlock: contentBlocks) {
-			contentBlock.removeLinks();
-			contentBlock.add(linkTo(methodOn(CatalogController.class).getContentBlock(contentBlock.getIdentifier())).withRel(contentBlock.getIdentifier()));
-		}
+		contentBlocks.forEach(cb -> {
+			cb.removeLinks();
+			cb.add(linkTo(methodOn(CatalogController.class).getContentBlock(cb.getIdentifier())).withRel(cb.getIdentifier()));
+		});
 		return contentBlocks;
 	}
 
@@ -74,12 +73,9 @@ public class CatalogController {
 	}
 
 	@RequestMapping(value = "/products/{id}/upsell", method = RequestMethod.GET)
-	public List<ProductSummary> getUpsellProducts(
-			@PathVariable("id") final String id,
-			@RequestParam(value="view", required=false) String view) {
+	public List<ProductSummary> getUpsellProducts(@PathVariable("id") final String id) {
 		
-		return catalogService.getUpsellProducts(id, view);
+		return catalogService.getUpsellProducts(id);
 	}
-
 
 }

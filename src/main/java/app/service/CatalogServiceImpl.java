@@ -18,7 +18,7 @@ public class CatalogServiceImpl implements CatalogService {
 
 	@Override
 	@Cacheable("products")
-	public ProductSummary getProductSummary(String id, String view) {
+	public ProductSummary getProductSummary(String id) {
 		return catalogDao.getProduct(id);
 	}
 
@@ -29,7 +29,7 @@ public class CatalogServiceImpl implements CatalogService {
 	}
 
 	@Override
-	public List<ProductSummary> getUpsellProducts(String id, String view) {
+	public List<ProductSummary> getUpsellProducts(String id) {
 		return catalogDao.getUpsellProducts(id);
 	}
 

@@ -13,7 +13,7 @@ public interface CatalogService {
 	 * @param view
 	 * @return
 	 */
-	ProductSummary getProductSummary(String id, String view);
+	ProductSummary getProductSummary(String id);
 
 	/**
 	 * Get CMS block for the given id
@@ -35,5 +35,5 @@ public interface CatalogService {
 	 * @param view
 	 * @return
 	 */
-	List<ProductSummary> getUpsellProducts(String id, String view);
+	List<ProductSummary> getUpsellProducts(String id);
 }
