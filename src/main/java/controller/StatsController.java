@@ -12,7 +12,6 @@ import stats.Profiler;
 public class StatsController {
 
 	private static final String CMI_API_OK = "OK";
-	private boolean shouldShutdown;
 	
 	@Autowired
 	private Profiler profiler;
@@ -30,8 +29,7 @@ public class StatsController {
 
 	@RequestMapping("_ns_/nstest.html")
 	public ResponseEntity<String> nstest() {
-		HttpStatus status = shouldShutdown ? HttpStatus.NOT_FOUND : HttpStatus.OK;
-		return new ResponseEntity<String>(CMI_API_OK, status);
+		return new ResponseEntity<String>(CMI_API_OK, HttpStatus.OK);
 	}
 	
 }
