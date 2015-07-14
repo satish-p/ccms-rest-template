@@ -42,18 +42,12 @@ public class CatalogController {
 		productSummary.removeLinks();
 		productSummary.add(linkTo(methodOn(CatalogController.class).getProduct(id)).withSelfRel());
 		productSummary.add(linkTo(methodOn(CatalogController.class).getUpsellProducts(id)).withRel("upsell"));
-		productSummary.add(linkTo(methodOn(CatalogController.class).getXsellProducts(id)).withRel("xsell"));
 		return productSummary;
 	}
 
 	@RequestMapping(value = "/products/{id}/upsell", method = RequestMethod.GET)
 	public List<ProductSummary> getUpsellProducts(@PathVariable("id") final String id) {
 		return catalogService.getUpsellProducts(id);
-	}
-
-	@RequestMapping(value = "/products/{id}/xsell", method = RequestMethod.GET)
-	public List<ProductSummary> getXsellProducts(@PathVariable("id") final String id) {
-		return catalogService.getXsellProducts(id);
 	}
 
 	@RequestMapping(value = "/cms", method = RequestMethod.GET)
