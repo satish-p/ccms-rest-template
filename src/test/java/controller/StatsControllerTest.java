@@ -41,4 +41,9 @@ public class StatsControllerTest {
 		verify(profiler).getHtmlHogStats();
 	}
 
+	@Test
+	public void testNsTest() {
+		assertNotNull(controller.nstest());
+	}
+
 }
