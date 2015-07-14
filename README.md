@@ -7,14 +7,13 @@ Features
 * Plain / executable war
 * Unit Tests
 * Integration tests
-* OAUTH2 Security framework
 * Metrics & Health
 * Logging framework
 * Code Quality & Coverage Analysis with SonarQube
-* Upload to AOL Nexus Maven Repository
 * Caching abstraction with ehcache caching provider
 * Automatic Swagger Documentation Generation Framework
 * Create Docker images
+* Upload to Docker repository
 * Starter JMeter scripts
 * Kick Start Jenkins CI/CD Pipeline
  
@@ -98,13 +97,6 @@ There are many tools used for code quality analysis of this project such as Chec
  
 ```
 sh gradlew sonarRunner
-```
-
-## Maven Nexus Repository
-The built artifact can be uploaded to Maven Nexus Repository simply by running the following command.
-
-```
-sh gradlew upload
 ```
 
 ## Caching abstraction
