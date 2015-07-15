@@ -27,7 +27,7 @@ public class CmsController {
 	@Autowired
 	private CatalogService catalogService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<ContentBlock> getContentBlocks(
 			@RequestParam("prefix") final String prefix) {
 		
