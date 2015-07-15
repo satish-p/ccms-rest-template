@@ -43,9 +43,4 @@ public class ProductController {
 		return catalogService.getUpsellProducts(id);
 	}
 
-	@RequestMapping(value = "/{id}/xsell", method = RequestMethod.GET)
-	public List<ProductSummary> getXsellProducts(@PathVariable("id") final String id) {
-		return catalogService.getXsellProducts(id);
-	}
-
 }
