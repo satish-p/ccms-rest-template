@@ -4,16 +4,16 @@ apply plugin: "sonar-runner"
 
 sonarRunner {
 	sonarProperties {
-        property "sonar.projectKey", "ccms-rest-template"
-		property "sonar.projectName", "ccms-rest-template"
-		property "sonar.host.url", "http://pse-ci-m02.twhite.aol.com:9000"
-		property "sonar.jdbc.url", "jdbc:mysql://pse-ci-m02.twhite.aol.com:3306/sonar"
+        property "sonar.projectKey", "rest-template"
+		property "sonar.projectName", "rest-template"
+		property "sonar.host.url", "http://sonar.company.com:9000"
+		property "sonar.jdbc.url", "jdbc:mysql://sonardb.company.com:3306/sonar"
 		property "sonar.jdbc.driverjavaName", "com.mysql.jdbc.Driver"
-		property "sonar.jdbc.username", "sonar"
-		property "sonar.jdbc.password", "sonar"
+		property "sonar.jdbc.username", "username"
+		property "sonar.jdbc.password", "password"
 		property "sonar.jacoco.itReportPath", "build/jacoco/integrationTest.exec"
 		property "sonar.exclusions", "**/configuration/*.java, **/model/**/*.java"
 		property "sonar.junit.reportsPath", test.reports.junitXml.destination
-		property "sonar.scm.url", "scm:git:git@stash.ops.aol.com/scm/ccare/cmitemplate.git"
+		property "sonar.scm.url", "scm:git:git@github.com/scm/ccare/resttemplate.git"
 	}
 }

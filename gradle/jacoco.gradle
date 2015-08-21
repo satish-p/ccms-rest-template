@@ -4,7 +4,7 @@ apply plugin: "jacoco"
 
 test {
 	jacoco {
-		excludes = ["**/*Test.java com/aol/ecommerce/schema/*.java **/*JAXBDebug.java com/aol/cmi/application/*.java"]
+		excludes = ["app/configuration/*.java"]
 	}
 }
 
@@ -15,15 +15,15 @@ task jacocoIntegrationTestReport(type: JacocoReport) {
 
 integrationTest {
 	jacoco {
-		excludes = ["**/*Test.java com/aol/cmi/application/*.java com/aol/cmi/stats/*.java com/aol/cmi/controller/*.java com/aol/ecommerce/schema/*.java **/*JAXBDebug.java"]
+		excludes = ["app/configuration/*.java"]
 	}
 }
 
 jacocoTestReport.doFirst{
-	classDirectories = files('build/classes/main/com/aol/cmi')
+	classDirectories = files('build/classes/main/app')
 }
 
 jacocoIntegrationTestReport.doFirst{
-	classDirectories = files('build/classes/main/com/aol/cmi/dao')
+	classDirectories = files('build/classes/main/app')
 }
 

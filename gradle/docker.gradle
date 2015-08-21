@@ -21,7 +21,7 @@ task copyAgent(type: Copy) {
 distDocker {
     exposePort 8080
     push true
-    tag = "docker.aws.obi.aol.com/resttemplate"
+    tag = "docker.company.com/resttemplate"
     addFile ("$buildDir/libs/newrelic.jar", "/app/newrelic.jar")
     addFile ("src/main/resources/newrelic.yml", "/app/newrelic.yml")
 }

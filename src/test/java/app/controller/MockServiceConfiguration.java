@@ -12,8 +12,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import app.service.CatalogService;
 import app.service.ProfileService;
 
-import com.aol.util.hog4j.MsStats;
-
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages={"com.aol.cmi"})
@@ -31,8 +29,4 @@ public class MockServiceConfiguration {
 		return mock(CatalogService.class);
 	}
 	
-	@Bean
-	public MsStats msStats() throws Exception {
-		return new MsStats("cmi-test");
-	}
 }

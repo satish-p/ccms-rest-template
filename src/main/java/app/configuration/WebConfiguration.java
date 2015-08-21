@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.servlet.Filter;
 
-import net.bull.javamelody.MonitoringFilter;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +12,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import app.filter.JsonpCallbackFilter;
-
-import com.aol.util.hog4j.MsStats;
+import net.bull.javamelody.MonitoringFilter;
 
 @Configuration
 public class WebConfiguration extends WebMvcConfigurationSupport {
@@ -36,11 +33,6 @@ public class WebConfiguration extends WebMvcConfigurationSupport {
     }
 
 
-    @Bean
-    public MsStats msStats() throws Exception {
-    	return new MsStats("cmioffers");
-    }
-    
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(converter());
         addDefaultHttpMessageConverters(converters);

@@ -1,9 +1,9 @@
 buildscript {
-	ext {
+    ext {
         springBootVersion = '1.2.5.RELEASE'
     }
     repositories {
-		maven { url "http://cmmaven.cm.aol.com:8081/nexus/content/groups/public" }
+        mavenCentral()
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
@@ -40,7 +40,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    maven { url "http://cmmaven.cm.aol.com:8081/nexus/content/groups/public" }
+    mavenCentral()
 }
 
 def springVersion="4.1.7.RELEASE"
@@ -63,22 +63,19 @@ dependencies {
 	// Aspects
     compile 'org.aspectj:aspectjrt:1.7.4'
     compile 'org.aspectj:aspectjweaver:1.7.4'
-    
-	// Utils
-    compile 'com.aol:hog4j:4.1'
-	compile 'com.aol.logging:web-logs:2.0.1'
-	
+    	
 	// API Documentation
 	compile "io.springfox:springfox-swagger2:2.0.2"
 	//compile 'io.springfox:springfox-swagger-ui:2.0.2'
+	
+	// Utils
+	compile "org.apache.commons:commons-lang3:3.4"
 	
 	// Caching
 	compile ('net.sf.ehcache:ehcache-core:2.6.8')
 	compile ("org.springframework:spring-context-support:$springVersion")
 	
 	// Metrics
-	compile "com.codahale.metrics:metrics-core:3.0.1"
-	compile "com.codahale.metrics:metrics-servlets:3.0.1"
 	compile 'net.bull.javamelody:javamelody-core:1.52.0'
 		
 	// Testing
@@ -88,5 +85,5 @@ dependencies {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.2'
+    gradleVersion = '2.6'
 }

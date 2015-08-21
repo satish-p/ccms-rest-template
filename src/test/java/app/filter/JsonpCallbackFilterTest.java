@@ -13,10 +13,6 @@ import org.junit.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import app.filter.JsonpCallbackFilter;
-
-import com.aol.logging.filter.LoggingResponseWrapper;
-
 public class JsonpCallbackFilterTest {
 
 	private JsonpCallbackFilter jsonpCallbackFilter;
@@ -72,7 +68,7 @@ public class JsonpCallbackFilterTest {
 	public void testDoFilterCallback() throws IOException, ServletException {
 		MockHttpServletRequest request = request();
 		request.setParameter("callback", "blahblah");
-		jsonpCallbackFilter.doFilter(request, new LoggingResponseWrapper(response()), chain());
+		jsonpCallbackFilter.doFilter(request, new MockHttpServletResponse(), chain());
 	}
 
 }
