@@ -8,7 +8,6 @@ Features
 * Unit Tests
 * Integration tests
 * Metrics & Health
-* Logging framework
 * Code Quality & Coverage Analysis with SonarQube
 * Caching abstraction with ehcache caching provider
 * Automatic Swagger Documentation Generation Framework
@@ -47,7 +46,7 @@ sh gradlew build
 The build process creates an executable war file. So you can run the web app
 
 ```
-java -jar build/lib/cmitemplate.war
+java -jar build/lib/resttemplate.war
 ```
 
 or
@@ -79,18 +78,12 @@ The application exposes multiple metrics about itself at run time.
 ### Javamelody
 The application exposes various metrics about itself such as requests, errors, memory, cpu, threads, gc usage at uri /monitoring
 
-### Hog4J
-The application expose internal metrics about time taken by each public method in controller, service and dao layer at uri /stats
-
 ### Spring Boot Actuator
 The application support spring boot actuator metrics
 
 /manage/env - The environment variables, startup parameters etc
 /manage/health - Health indicator of the application
 /manage/metrics - Metrics of the application
-
-## Logging framework
-The application come with a logging framework that can log data in the incoming request and the response it send. These logs can be controlled and customized.
 
 ## Code Quality & Coverage Analysis
 There are many tools used for code quality analysis of this project such as Checkstyle, Pmd, FindBugs, Jacoco. Gradle and SonarQube makes it simple by running all the analysis and uploading the results to SonarQube. The following command will do that for you.
@@ -155,9 +148,9 @@ Sample jmeter scripts can be found in src/tests/jmeter directory. The scripts ca
 
 ```
 jmeter  -n \
-        -t CMITemplate.jmx \
-        -l CMITemplate.jtl \
-        -j CMITemplate.jmx.log \
+        -t RestTemplate.jmx \
+        -l RestTemplate.jtl \
+        -j RestTemplate.jmx.log \
         -Jhost=localhost -Jport=8080 -Jprotocol=http
 ```
 
