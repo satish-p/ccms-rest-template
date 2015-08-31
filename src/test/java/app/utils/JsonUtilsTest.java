@@ -22,5 +22,14 @@ public class JsonUtilsTest {
 	public void testToJsonStringNonNull() {
 		assertNull(JsonUtils.toJsonStringNonNull(null));
 	}
+	
+    @Test
+    public void testToJsonStringException() {
+        assertNull(JsonUtils.toJsonString(new NoPublicVariables()));
+    }
 
+    @Test
+    public void testToJsonStringNonNullException() {
+        assertNull(JsonUtils.toJsonStringNonNull(new NoPublicVariables()));
+    }
 }

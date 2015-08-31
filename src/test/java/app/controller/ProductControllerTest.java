@@ -79,5 +79,20 @@ public class ProductControllerTest {
 		verify(catalogService).getUpsellProducts(anyString());
 	}
 
+    @Test
+    public void testGetXsellProducts() throws Exception {
+        
+        // Set Expectations
+        when(catalogService.getXsellProducts(anyString()))
+        .thenReturn(Arrays.asList(createProductSummary(PRODUCT_SKU)));
+        
+        // Do the test
+        List<ProductSummary> responseEntity = productController.getxsellProducts(PRODUCT_SKU);
+        assertNotNull(responseEntity);
+        assertFalse(responseEntity.isEmpty());
+
+        // Verify
+        verify(catalogService).getXsellProducts(PRODUCT_SKU);
+    }
 
 }

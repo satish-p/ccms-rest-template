@@ -1,9 +1,7 @@
 package app.service;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +9,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import app.dao.CatalogDao;
@@ -22,13 +22,15 @@ import app.service.CatalogServiceImpl;
 public class CatalogServiceTest {
 
 	private CatalogService catalogService;
+	
+	@Mock
 	private CatalogDao catalogDao;
 	
 	@Before
 	public void setUp() throws Exception {
 		catalogService = new CatalogServiceImpl();
 		
-		catalogDao = mock(CatalogDao.class);
+		MockitoAnnotations.initMocks(this);
 		ReflectionTestUtils.setField(catalogService, "catalogDao", catalogDao);
 	}
 

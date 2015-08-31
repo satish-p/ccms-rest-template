@@ -4,6 +4,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Profiler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Profiler.class);
+    
 	@Pointcut("execution(public * app.controller..*.*(..))")
 	public void inWebLayer() {
 		// Web Layer
@@ -61,6 +65,7 @@ public class Profiler {
 
 	private void captureStats(final String name, final long executionTime) {
 		// Capture stats
+	    LOGGER.trace("Method {} took {} ms", name, executionTime);
 	}
 
 	@Override
